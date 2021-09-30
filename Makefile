@@ -43,7 +43,8 @@ m:
 vp : vim_prepare
 vim_prepare :
 	mkdir -p _vim/
-	echo $(c01) |xargs -n 1 >  _vim/file01.txt
+	echo Makefile            > _vim/file01.txt
+	echo $(c01) |xargs -n 1 >> _vim/file01.txt
 	echo $(h01) |xargs -n 1 >> _vim/file01.txt
 	#echo /home/ti/ti/ccs1040/ccs/ccs_base/msp430/include_gcc/msp430fr2433.h \
 	#	>>                                                 _vim/file01.txt
