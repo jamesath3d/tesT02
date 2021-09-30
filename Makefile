@@ -20,7 +20,9 @@ $(if $(c09),,$(error "c09 don't exit. check <projName> and run again. Exit."))
 
 
 all:
-	@echo ; echo "$${helpText}" ; echo
+#	@echo
+	@echo "$${helpText}" 
+#	@echo
 
 
 ca: 
@@ -49,34 +51,66 @@ vim_prepare :
 	ctags -L                                               _vim/file01.txt
 
 
-gs:
-	git status
+gs:=git status
+gc:=git commit -a
+gd:=git diff
+up:=git push -u origin main
 
-gc:
-	git commit -a
-
-gd :
-	git diff
-
-up:
-	git push -u origin main
-
-
-
-
-v1:=$(dstDir01)/main.c
-v2:=$(dstDir01)/_cable_tester_mainloop_once.c
-v1 v2: 
-	vim $($@)
+gitgit:= gs gc gd up
+define gitctr
+$1 :
+	$$($$@)
+endef
+$(foreach ee1,$(gitgit),$(eval $(call gitctr,$(ee1))))
 
 
 
+#v1:=$(dstDir01)/main.c
+#v2:=$(dstDir01)/_cable_tester_mainloop_once.c
+#v1 v2: 
+#	vim $($@)
+
+c2idx:=1
+c2vP1:=
+c2vP2:=
+c2vP3:=
+define c2v
+c2now:=v$(c2idx)
+c2vP1 += $1
+c2vP2 += $(c2idx)
+c2vP3 += $(c2now)
+$$(c2now):=$1
+$$(c2now): $1
+
+c2idx:=$(shell expr $(c2idx) + 1 )
+
+endef
+
+$(foreach bb1,$(c09),$(eval $(call c2v,$(bb1))))
+
+#	vim $($@)
+$(c2vP3) : 
+	vim $<
 
 
-define helpText
+
+
+
+define helpText2
 	c09 -> $(c09)
 	h09 -> $(h09)
+	c2vP1 -> $(c2vP1)
+	c2vP2 -> $(c2vP2)
+	c2vP3 -> $(c2vP3)
+	v1 -> $(v1)
+	v2 -> $(v2)
+endef
 
+define helpText
+ $(foreach ee1,$(gitgit),$(ee1) -> $($(ee1))
+)
+ $(foreach ee1,$(c2vP3),$(ee1) -> vim $($(ee1))
+)
 endef
 export helpText
 
