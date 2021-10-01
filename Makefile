@@ -152,8 +152,19 @@ $(cmdc):
 cmdc:
 	$(foreach ee1,$(msp430vP3),@Makefile_env=1 make -C $($(ee1)) -f $(makefile_path) $(cmdc) ; echo $(EOL))
 
-lls:=ls -l `find $(projName)/ -name "*.out" -o -name "*.hex" -o -name "*.txt" 2>/dev/null `
+lls:=\
+	ls -l \
+	`find $(projName)/ -name "*.out" -o -name "*.hex" -o -name "*.txt" 2>/dev/null `
 lls:
+	$($@)
+ss:=\
+	for aa1 in `find $(projName)/ -name "*.out"` ; do \
+	cp $${aa1} $${aa1}.strip ; \
+	/home/ti/ti/ccs1040/ccs/tools/compiler/msp430-gcc-9.3.1.11_linux64/bin/msp430-elf-strip \
+	$${aa1}.strip ; \
+	ls -l $${aa1}* $${aa1%.out}.map ; \
+	done
+ss:
 	$($@)
 
 define helpDebug2
