@@ -48,7 +48,7 @@ c2vP1:=
 c2vP2:=
 c2vP3:=
 define c2v
-c2now:=v$(c2idx)
+$(eval c2now:=v$(c2idx))
 c2vP1 += $1
 c2vP2 += $(c2idx)
 c2vP3 += $(c2now)
@@ -82,14 +82,40 @@ $(foreach ee1,$(gitgit),$(eval $(call gitctr,$(ee1))))
 
 
 
+d2u:=dos2unix
+d2u:$(d2u)
+dos2unix:
+	dos2unix $(vim_tags_objS)
 
+msp430idx:=1
+msp430vP1:=
+msp430vP2:=
+msp430vP3:=
+define msp430build
+$(eval msp430now:=b4$(msp430idx))
+msp430vP1 += $1
+msp430vP2 += $(msp430idx)
+msp430vP3 += $(msp430now)
+$$(msp430now):=$(projName)/$1/
+$$(msp430now): $(projName)/$1/
+	cd $$($$@) && make clean
+
+msp430idx:=$(shell expr $(msp430idx) + 1 )
+
+endef
+$(foreach ee1,$(msp430DebugNameS),$(eval $(call msp430build,$(ee1))))
 
 
 define helpText
  $(foreach ee1,$(c2vP3),$(ee1) -> vim $($(ee1))
 ) 
- $(foreach ee1,$(gitgit),$(ee1) -> $($(ee1))
+ $(foreach ee1,$(msp430vP3),$(ee1) -> vim $($(ee1))
+) 
+ $(foreach ee1,$(gitgit) d2u,$(ee1) -> $($(ee1))
 )$(helpText2)
+msp430vP1 -> $(msp430vP1)
+msp430vP2 -> $(msp430vP2)
+msp430vP3 -> $(msp430vP3)
 endef
 export helpText
 
