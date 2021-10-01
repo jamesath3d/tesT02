@@ -164,6 +164,8 @@ ss:=\
 	$${aa1}.strip ; \
 	ls -l $${aa1}* $${aa1%.out}.map ; \
 	done
+
+strip:ss
 ss:
 	$($@)
 
@@ -189,7 +191,8 @@ define helpText
  $(foreach ee1,$(msp430vP3),$(ee1) -> build in $($(ee1))
 ) 
  $(foreach ee1,cmdc $(gitgit) d2u b4a b4c b4m,$(ee1) -> $($(ee1))
-)$(helpText2)$(helpDebug)
+) ss  -> strip
+$(helpText2)$(helpDebug)
 endef
 export helpText
 
