@@ -202,8 +202,11 @@ testOBJvP4 += $$(testOBJvim)
 v5a += $$(testOBJvim)
 t5a += $$(testOBJnow)
 
-$$(testOBJnow) , $$(testOBJvim):
+$$(testOBJnow) :
 	$$($$@) | tee log.$$@.txt
+	@echo
+$$(testOBJvim):
+	$$($$@) 
 	@echo
 
 #	make -C $1 -f $$($$@)
