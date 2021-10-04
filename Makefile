@@ -9,7 +9,8 @@ define EOL
 
 
 endef
-makefile_path:=$(shell realpath Makefile)
+makefile_real:=$(shell realpath Makefile)
+makefile_dir:=$(shell dirname $(makefile_real))
 
 all:
 	@echo "$${helpText}" 
@@ -53,6 +54,9 @@ clean_all:
 		-o -name "*~" \
 		-o -name "*_linkInfo.xml" \
 		-o -name "BlinkLED*.out" \
+		-o -name "BlinkLED*.out.strip" \
+		-o -name "BlinkLED*.txt" \
+		-o -name "BlinkLED*.hex" \
 		`
 
 
@@ -84,8 +88,12 @@ gs:=git status
 gc:=git commit -a
 gd:=git diff
 up:=git push -u origin main
+gss:=cd $(projName)/     && $(gs)
+gsm:=cd $(makefile_dir)/ && $(gs)
+gcs:=cd $(projName)/     && $(gc)
+gcm:=cd $(makefile_dir)/ && $(gc)
 
-gitgit:= gs gc gd up
+gitgit:= gcs gcm gss gsm gs gc gd up
 define gitctr
 $1 :
 	$$($$@)
@@ -145,12 +153,13 @@ $(cmdc):
 		-e 's;C:/devJames/workspace_v10;/home/$(USER)/workspace_v10;g' \
 		-e 's;_win64\b;_linux64;g' \
 		-e 's;gcc-9.3.1.exe;gcc-9.3.1;g' \
+		-e 's;msp430-elf-objcopy.exe;msp430-elf-objcopy;g' \
 		-e 's;^RM := DEL /F;RM := rm -fr;g' \
 		-e 's;^RMDIR := RMDIR /S/Q;RMDIR := rm -rf;g' \
 		`find -name makefile -o -name "*.mk" -o -name "*.d"`
 
 cmdc:
-	$(foreach ee1,$(msp430vP3),@Makefile_env=1 make -C $($(ee1)) -f $(makefile_path) $(cmdc) ; echo $(EOL))
+	$(foreach ee1,$(msp430vP3),@Makefile_env=1 make -C $($(ee1)) -f $(makefile_real) $(cmdc) ; echo $(EOL))
 
 lls:=\
 	ls -l \
@@ -173,7 +182,7 @@ define helpDebug2
 msp430vP1 -> $(msp430vP1)
 msp430vP2 -> $(msp430vP2)
 msp430vP3 -> $(msp430vP3)
-makefile_path -> $(makefile_path)
+makefile_real -> $(makefile_real)
 b41 -> $(b41)
 b42 -> $(b42)
 b43 -> $(b43)
