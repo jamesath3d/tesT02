@@ -180,6 +180,32 @@ strip:ss
 ss:
 	$($@)
 
+
+testOBJs:=$(strip $(testOBJs))
+testOBJidx:=1
+testOBJvP1:=
+testOBJvP2:=
+testOBJvP3:=
+t5a:=
+define testOBJfunc
+$$(eval testOBJnow:=t5$$(testOBJidx))
+$$(eval $$(testOBJnow):=$(projName)/$1/)
+testOBJvP1 += $1
+testOBJvP2 += $$(testOBJidx)
+testOBJvP3 += $$(testOBJnow)
+
+
+$$(eval testOBJidx:=$$(shell expr $$(testOBJidx) + 1 ))
+
+endef
+$(foreach aa1,$(testOBJs),$(eval $(call testOBJfunc,$(aa1))))
+
+define helpDebug3
+testOBJvP1 -> $(testOBJvP1)
+testOBJvP2 -> $(testOBJvP2)
+testOBJvP3 -> $(testOBJvP3)
+endef
+
 define helpDebug2
 msp430vP1 -> $(msp430vP1)
 msp430vP2 -> $(msp430vP2)
@@ -195,6 +221,8 @@ endef
 define helpDebug
  lls -> $(lls)
 endef
+
+helpDebug +=$(EOL)$(helpDebug3)
 
 define helpText
  $(foreach ee1,$(c2vP3),$(ee1) -> vim $($(ee1))
