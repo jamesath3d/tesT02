@@ -92,8 +92,10 @@ gss:=cd $(projName)/     && $(gs)
 gsm:=cd $(makefile_dir)/ && $(gs)
 gcs:=cd $(projName)/     && $(gc)
 gcm:=cd $(makefile_dir)/ && $(gc)
+ups:=cd $(projName)/     && $(up)
+upm:=cd $(makefile_dir)/ && $(up)
 
-gitgit:= gcs gcm gss gsm gs gc gd up
+gitgit:= ups upm gcs gcm gss gsm gs gc gd up
 define gitctr
 $1 :
 	$$($$@)
