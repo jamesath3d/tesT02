@@ -193,8 +193,8 @@ define testOBJfunc
 $$(eval testOBJnow:=t5$$(testOBJidx))
 $$(eval testOBJvim:=v5$$(testOBJidx))
 $$(eval testOBJmake:=$$(shell realpath Makefile.$1))
-$$(eval $$(testOBJnow):=$$(testOBJmake) $1)
-$$(eval $$(testOBJvim):=$$(testOBJmake))
+$$(eval $$(testOBJnow):=make -C $1/ -f $$(testOBJmake) $1)
+$$(eval $$(testOBJvim):=vim $$(testOBJmake))
 testOBJvP1 += $1
 testOBJvP2 += $$(testOBJidx)
 testOBJvP3 += $$(testOBJnow)
@@ -202,13 +202,12 @@ testOBJvP4 += $$(testOBJvim)
 v5a += $$(testOBJvim)
 t5a += $$(testOBJnow)
 
-$$(testOBJvim):
-	vim $$($$@)
+$$(testOBJnow) , $$(testOBJvim):
+	$$($$@)
 	@echo
 
-$$(testOBJnow):
-	make -C $1 -f $$($$@)
-	@echo
+#	make -C $1 -f $$($$@)
+#	@echo
 
 $$(eval testOBJidx:=$$(shell expr $$(testOBJidx) + 1 ))
 
