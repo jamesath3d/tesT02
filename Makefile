@@ -203,7 +203,7 @@ v5a += $$(testOBJvim)
 t5a += $$(testOBJnow)
 
 $$(testOBJnow) , $$(testOBJvim):
-	$$($$@)
+	$$($$@) | tee log.$$@.txt
 	@echo
 
 #	make -C $1 -f $$($$@)
@@ -213,6 +213,9 @@ $$(eval testOBJidx:=$$(shell expr $$(testOBJidx) + 1 ))
 
 endef
 $(foreach aa1,$(testOBJs),$(eval $(call testOBJfunc,$(aa1))))
+
+
+
 
 define helpDebug3
 testOBJvP1 -> $(testOBJvP1)
