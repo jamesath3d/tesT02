@@ -186,14 +186,29 @@ testOBJidx:=1
 testOBJvP1:=
 testOBJvP2:=
 testOBJvP3:=
+testOBJvP4:=
 t5a:=
+v5a:=
 define testOBJfunc
 $$(eval testOBJnow:=t5$$(testOBJidx))
-$$(eval $$(testOBJnow):=$(projName)/$1/)
+$$(eval testOBJvim:=v5$$(testOBJidx))
+$$(eval testOBJmake:=$$(shell realpath Makefile.$1))
+$$(eval $$(testOBJnow):=$$(testOBJmake) $1)
+$$(eval $$(testOBJvim):=$$(testOBJmake))
 testOBJvP1 += $1
 testOBJvP2 += $$(testOBJidx)
 testOBJvP3 += $$(testOBJnow)
+testOBJvP4 += $$(testOBJvim)
+v5a += $$(testOBJvim)
+t5a += $$(testOBJnow)
 
+$$(testOBJvim):
+	vim $$($$@)
+	@echo
+
+$$(testOBJnow):
+	make -C $1 -f $$($$@)
+	@echo
 
 $$(eval testOBJidx:=$$(shell expr $$(testOBJidx) + 1 ))
 
@@ -204,6 +219,9 @@ define helpDebug3
 testOBJvP1 -> $(testOBJvP1)
 testOBJvP2 -> $(testOBJvP2)
 testOBJvP3 -> $(testOBJvP3)
+testOBJvP4 -> $(testOBJvP4)
+t51 -> $(t51)
+v51 -> $(v51)
 endef
 
 define helpDebug2
@@ -222,14 +240,14 @@ define helpDebug
  lls -> $(lls)
 endef
 
-helpDebug +=$(EOL)$(helpDebug3)
+#helpDebug +=$(EOL)$(helpDebug3)
 
 define helpText
  $(foreach ee1,$(c2vP3),$(ee1) -> vim $($(ee1))
 ) 
  $(foreach ee1,$(msp430vP3),$(ee1) -> build in $($(ee1))
 ) 
- $(foreach ee1,cmdc $(gitgit) d2u b4a b4c b4m,$(ee1) -> $($(ee1))
+ $(foreach ee1,cmdc $(gitgit) d2u b4a b4c b4m $(v5a) $(t5a),$(ee1) -> $($(ee1))
 ) ss  -> strip
 $(helpText2)$(helpDebug)
 endef
