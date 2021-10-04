@@ -126,7 +126,7 @@ msp430vP3 += $$(msp430now)
 
 
 $$(msp430now)m: $$($$(msp430now))
-	make -C $$<
+	make -C $$< | tee log.$$@.txt
 
 $$(msp430now)c: $$($$(msp430now))
 	make -C $$< clean
