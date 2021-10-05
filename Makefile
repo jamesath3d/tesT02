@@ -24,6 +24,7 @@ endif
 #projName:= 
 projName:=$(strip $(projName))
 $(if $(projName),,$(eval projName=.))
+testOBJs:=$(strip $(testOBJs))
 
 dateX1:=$(shell LC_ALL=C date +%Y_%m%d_%H%M%P_%S )
 
@@ -165,7 +166,11 @@ cmdc:
 
 lls:=\
 	ls -l \
-	`find $(projName)/ -name "*.out" -o -name "*.hex" -o -name "*.txt" 2>/dev/null `
+	`find $(projName)/ -name "*.out" -o -name "*.hex" -o -name "*.txt" 2>/dev/null ` \
+	$(if $(testOBJs),$(foreach aa1,$(testOBJs), \
+	`find $(aa1)/ -name "*.out" -o -name "*.hex" -o -name "*.txt" 2>/dev/null ` \
+	))
+
 lls:
 	$($@)
 ss:=\
@@ -181,7 +186,6 @@ ss:
 	$($@)
 
 
-testOBJs:=$(strip $(testOBJs))
 testOBJidx:=1
 testOBJvP1:=
 testOBJvP2:=
