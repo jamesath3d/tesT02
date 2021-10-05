@@ -203,14 +203,12 @@ v5a += $$(testOBJvim)
 t5a += $$(testOBJnow)
 
 $$(testOBJnow) :
+	mkdir -p $1/
 	$$($$@) | tee log.$$@.txt
 	@echo
 $$(testOBJvim):
 	$$($$@) 
 	@echo
-
-#	make -C $1 -f $$($$@)
-#	@echo
 
 $$(eval testOBJidx:=$$(shell expr $$(testOBJidx) + 1 ))
 
