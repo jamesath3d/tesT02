@@ -95,8 +95,10 @@ gcs:=cd $(projName)/     && $(gc)
 gcm:=cd $(makefile_dir)/ && $(gc)
 ups:=cd $(projName)/     && $(up)
 upm:=cd $(makefile_dir)/ && $(up)
+gds:=cd $(projName)/     && $(gd)
+gdm:=cd $(makefile_dir)/ && $(gd)
 
-gitgit:= ups upm gcs gcm gss gsm gs gc gd up
+gitgit:= gds gdm ups upm gcs gcm gss gsm gs gc gd up
 define gitctr
 $1 :
 	$$($$@)
@@ -173,6 +175,34 @@ lls:=\
 
 lls:
 	$($@)
+
+txtCMD1:="/home/ti/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/hex430"
+txtCMD2:=--memwidth=8 --romwidth=8 --diag_wrap=off --ti_txt -o
+txtCMD9:=$(txtCMD1) $(txtCMD2)
+txtFOR:=\
+	for aa1 in \
+	`find $(projName)/ -name "*.out" 2>/dev/null ` \
+	$(if $(testOBJs),$(foreach aa1,$(testOBJs), \
+	`find $(aa1)/      -name "*.out" 2>/dev/null ` \
+	)) ; do 
+txt:=\
+	$(txtFOR) \
+	bb1=$${aa1%.*}.ti.txt ; \
+	rm -f $${bb1} ; \
+	done ; \
+	$(txtFOR) \
+	bb1=$${aa1%.*}.ti.txt ; \
+	$(txtCMD9) $${bb1} $${aa1} ; \
+	done ; \
+	$(txtFOR) \
+	bb1=$${aa1%.*}.ti.txt ; \
+	ls -l $${aa1} ; \
+	ls -l $${bb1} ; \
+	done
+
+txt:
+	$($@)
+
 ss:=\
 	for aa1 in `find $(projName)/ -name "*.out"` ; do \
 	cp $${aa1} $${aa1}.strip ; \
