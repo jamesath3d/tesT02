@@ -237,7 +237,7 @@ v5a += $$(testOBJvim)
 t5a += $$(testOBJnow)
 
 $$(testOBJnow) :
-	mkdir -p $1/
+	rm -fr ./$1/ ; mkdir ./$1/
 	$$($$@) | tee log.$$@.txt
 	@echo
 $$(testOBJvim):
