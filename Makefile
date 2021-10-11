@@ -243,6 +243,7 @@ $$(testOBJnow) :
 $$(testOBJvim):
 	$$($$@) 
 	@echo
+$$(testOBJvim)_txt:= \#\# $$($1_txt)
 
 $$(eval testOBJidx:=$$(shell expr $$(testOBJidx) + 1 ))
 
@@ -284,7 +285,7 @@ define helpText
 ) 
  $(foreach ee1,$(msp430vP3),$(ee1) -> build in $($(ee1))
 ) 
- $(foreach ee1,cmdc $(gitgit) d2u b4a b4c b4m $(v5a) $(t5a),$(ee1) -> $($(ee1))
+ $(foreach ee1,cmdc $(gitgit) d2u b4a b4c b4m $(v5a) $(t5a),$(ee1) -> $($(ee1)) $($(ee1)_txt) 
 ) ss  -> strip
 $(helpText2)$(helpDebug)
 endef
