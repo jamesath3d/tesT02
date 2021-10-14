@@ -239,7 +239,16 @@ t5a += $$(testOBJnow)
 $$(testOBJnow) :
 	rm -fr ./$1/ ; mkdir ./$1/
 	#$$($$@) | tee log.$$@.txt
-	$$($$@) 2>&1 > log.$$@.txt
+	$$($$@) > log.$$@.txt 2>&1 || ( \
+		echo ; echo ==error found ===; \
+		cat log.$$@.txt \
+		|sed -n  -e '/error/I,+20 p' |head -n 20 ; \
+		echo ; \
+		cat log.$$@.txt \
+		|grep '\bgcc\b' ; \
+		echo ; \
+		echo "see log.$$@.txt for details <<<< === error" ; \
+		echo ; exit 33 )
 	cat log.$$@.txt |grep gcc |grep Wall
 	@echo
 $$(testOBJvim):
