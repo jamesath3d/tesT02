@@ -290,9 +290,9 @@ define helpText
  $(foreach ee1,$(msp430vP3),$(ee1) -> build in $($(ee1))
 ) 
  $(foreach ee1,cmdc $(gitgit) d2u b4a b4c b4m $(v5a) $(t5a),$(ee1) -> $($(ee1)) $($(ee1)_txt) 
-) ss  -> strip
+) ttt -> $(ttt)
+ ss  -> strip
 $(helpText2)$(helpDebug)
-ttt -> $(ttt)
 endef
 export helpText
 
