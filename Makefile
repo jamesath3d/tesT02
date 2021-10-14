@@ -238,7 +238,8 @@ t5a += $$(testOBJnow)
 
 $$(testOBJnow) :
 	rm -fr ./$1/ ; mkdir ./$1/
-	$$($$@) | tee log.$$@.txt
+	#$$($$@) | tee log.$$@.txt
+	$$($$@) 2>&1 > log.$$@.txt
 	@echo
 $$(testOBJvim):
 	$$($$@) 
@@ -250,6 +251,9 @@ $$(eval testOBJidx:=$$(shell expr $$(testOBJidx) + 1 ))
 endef
 $(foreach aa1,$(testOBJs),$(eval $(call testOBJfunc,$(aa1))))
 
+ttt:=$(t5a)
+ttt: $(ttt)
+	#$(foreach aa1,$(t5a),make $(aa1)$(EOL))
 
 
 
@@ -288,6 +292,7 @@ define helpText
  $(foreach ee1,cmdc $(gitgit) d2u b4a b4c b4m $(v5a) $(t5a),$(ee1) -> $($(ee1)) $($(ee1)_txt) 
 ) ss  -> strip
 $(helpText2)$(helpDebug)
+ttt -> $(ttt)
 endef
 export helpText
 
