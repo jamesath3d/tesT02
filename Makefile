@@ -240,6 +240,7 @@ $$(testOBJnow) :
 	rm -fr ./$1/ ; mkdir ./$1/
 	#$$($$@) | tee log.$$@.txt
 	$$($$@) 2>&1 > log.$$@.txt
+	cat log.$$@.txt |grep gcc |grep Wall
 	@echo
 $$(testOBJvim):
 	$$($$@) 
@@ -253,7 +254,6 @@ $(foreach aa1,$(testOBJs),$(eval $(call testOBJfunc,$(aa1))))
 
 ttt:=$(t5a)
 ttt: $(ttt)
-	#$(foreach aa1,$(t5a),make $(aa1)$(EOL))
 
 
 
