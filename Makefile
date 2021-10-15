@@ -249,7 +249,8 @@ $$(testOBJnow) :
 		echo ; \
 		echo "see log.$$@.txt for details <<<< === error" ; \
 		echo ; exit 33 )
-	cat log.$$@.txt |grep gcc |grep Wall
+	cat log.$$@.txt |grep gcc |grep Wall ; \
+		echo ; echo " build $$@ -> $$($$@) ok " ; echo 
 	@echo
 $$(testOBJvim):
 	$$($$@) 
