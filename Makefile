@@ -176,8 +176,9 @@ txtFiles:=\
 	)
 
 lls:= ls -l $(objFiles)
+llt:= ls -l $(txtFiles)
 
-lls:
+lls llt:
 	$($@)
 
 txtCMD1:="/home/ti/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/hex430"
@@ -281,6 +282,7 @@ burn :
 		echo ; \
 		echo "$(mspFlash_cmd)" ; \
 		done ; echo
+	@echo " if ' ERROR: The Debug Interface to the device has been secured ' , add ' -e ERASE_USER_CODE ' " ; echo
 	
 
 
