@@ -166,12 +166,16 @@ $(cmdc):
 cmdc:
 	$(foreach ee1,$(msp430vP3),@Makefile_env=1 make -C $($(ee1)) -f $(makefile_real) $(cmdc) ; echo $(EOL))
 
-lls:=\
-	ls -l \
-	`find $(projName)/ -name "*.out" -o -name "*.hex" -o -name "*.txt" 2>/dev/null ` \
-	$(if $(testOBJs),$(foreach aa1,$(testOBJs), \
-	`find $(aa1)/ -name "*.out" -o -name "*.hex" -o -name "*.txt" 2>/dev/null ` \
-	))
+objFiles:=\
+	$(foreach aa1,$(projName) $(testOBJs), \
+	`find $(aa1)/ -name "*.out" -o -name "*.hex" -o -name "*.ti.txt" 2>/dev/null ` \
+	)
+txtFiles:=\
+	$(foreach aa1,$(projName) $(testOBJs), \
+	`find $(aa1)/                                   -name "*.ti.txt" 2>/dev/null ` \
+	)
+
+lls:= ls -l $(objFiles)
 
 lls:
 	$($@)
@@ -265,6 +269,20 @@ $(foreach aa1,$(testOBJs),$(eval $(call testOBJfunc,$(aa1))))
 ttt:=$(t5a)
 ttt: $(ttt)
 
+mspFlash_path:=/home/dyn/ti/MSPFlasher/
+mspFlash_txt:=input.ti.txt
+mspFlash_cmd=LD_PRELOAD=$(mspFlash_path)/libmsp430.so $(mspFlash_path)/MSP430Flasher -w input.ti.txt -v -g -z [VCC]
+mspFlash_cmd:=LD_PRELOAD=$(mspFlash_path)/libmsp430.so $(mspFlash_path)/MSP430Flasher -w $${aa1} -v -g -z [VCC]
+
+burn := list burn files command
+burn :
+	for aa1 in $(txtFiles) ; do \
+		test -f $${aa1} || exit 32 ; \
+		echo ; \
+		echo "$(mspFlash_cmd)" ; \
+		done ; echo
+	
+
 
 
 define helpDebug3
@@ -290,6 +308,7 @@ endef
 
 define helpDebug
  lls -> $(lls)
+ burn -> $(burn)
 endef
 
 #helpDebug +=$(EOL)$(helpDebug3)
