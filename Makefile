@@ -174,11 +174,16 @@ txtFiles:=\
 	$(foreach aa1,$(projName) $(testOBJs), \
 	`find $(aa1)/                                   -name "*.ti.txt" 2>/dev/null ` \
 	)
+asmFiles:=\
+	$(foreach aa1,$(projName) $(testOBJs), \
+	`find $(aa1)/                                   -name "*.hex.asm" 2>/dev/null ` \
+	)
 
 lls:= ls -l $(objFiles)
 llt:= ls -l $(txtFiles)
+lla:= ls -l $(asmFiles)
 
-lls llt:
+lls llt lla :
 	$($@)
 
 txtCMD1:="/home/ti/ti/ccs1040/ccs/tools/compiler/ti-cgt-msp430_20.2.5.LTS/bin/hex430"
@@ -256,6 +261,7 @@ $$(testOBJnow) :
 		echo ; exit 33 )
 	cat log.$$@.txt |grep gcc |grep Wall ; \
 		echo ; echo " build $$@ -> $$($$@) ok " ; echo 
+	msp430-objdump -D $1/$1.hex > $1/$1.hex.asm
 	@echo
 $$(testOBJvim):
 	$$($$@) 
