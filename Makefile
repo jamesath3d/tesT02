@@ -257,9 +257,11 @@ v5a:=
 define testOBJfunc
 $$(eval testOBJnow:=t5$$(testOBJidx))
 $$(eval testOBJvim:=v5$$(testOBJidx))
+$$(eval testOBJlog:=l5$$(testOBJidx))
 $$(eval testOBJmake:=$$(shell realpath Makefile.$1))
 $$(eval $$(testOBJnow):=make -C $1/ -f $$(testOBJmake) $1)
 $$(eval $$(testOBJvim):=vim $$(testOBJmake))
+$$(eval $$(testOBJlog):=vim log.$$(testOBJnow).txt)
 testOBJvP1 += $1
 testOBJvP2 += $$(testOBJidx)
 testOBJvP3 += $$(testOBJnow)
@@ -284,7 +286,7 @@ $$(testOBJnow) :
 		echo ; echo " build $$@ -> $$($$@) ok " ; echo 
 	msp430-objdump -D $1/$1.ss.elf > $1/$1.ss.elf.asm
 	@echo
-$$(testOBJvim):
+$$(testOBJvim) $$(testOBJlog) :
 	$$($$@) 
 	@echo
 $$(testOBJvim)_txt:= \#\# $$($1_txt)
