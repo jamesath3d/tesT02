@@ -54,10 +54,10 @@ clean_all:
 		-o -name "*.map" \
 		-o -name "*~" \
 		-o -name "*_linkInfo.xml" \
-		-o -name "BlinkLED*.out" \
+		-o -name "BlinkLED*.out.elf" \
 		-o -name "BlinkLED*.out.strip" \
 		-o -name "BlinkLED*.txt" \
-		-o -name "BlinkLED*.hex" \
+		-o -name "BlinkLED*.ss.elf" \
 		`
 
 
@@ -168,7 +168,7 @@ cmdc:
 
 objFiles:=\
 	$(foreach aa1,$(projName) $(testOBJs), \
-	`find $(aa1)/ -name "*.out" -o -name "*.hex" -o -name "*.ti.txt" 2>/dev/null ` \
+	`find $(aa1)/ -name "*.out.elf" -o -name "*.ss.elf" -o -name "*.ti.txt" 2>/dev/null ` \
 	)
 txtFiles:=\
 	$(foreach aa1,$(projName) $(testOBJs), \
@@ -176,7 +176,7 @@ txtFiles:=\
 	)
 asmFiles:=\
 	$(foreach aa1,$(projName) $(testOBJs), \
-	`find $(aa1)/                                   -name "*.hex.asm" 2>/dev/null ` \
+	`find $(aa1)/                                   -name "*.ss.elf.asm" 2>/dev/null ` \
 	)
 
 lls:= ls -l $(objFiles)
@@ -191,9 +191,9 @@ txtCMD2:=--memwidth=8 --romwidth=8 --diag_wrap=off --ti_txt -o
 txtCMD9:=$(txtCMD1) $(txtCMD2)
 txtFOR:=\
 	for aa1 in \
-	`find $(projName)/ -name "*.out" 2>/dev/null ` \
+	`find $(projName)/ -name "*.out.elf" 2>/dev/null ` \
 	$(if $(testOBJs),$(foreach aa1,$(testOBJs), \
-	`find $(aa1)/      -name "*.out" 2>/dev/null ` \
+	`find $(aa1)/      -name "*.out.elf" 2>/dev/null ` \
 	)) ; do 
 txt:=\
 	$(txtFOR) \
@@ -214,11 +214,11 @@ txt:
 	$($@)
 
 ss:=\
-	for aa1 in `find $(projName)/ -name "*.out"` ; do \
+	for aa1 in `find $(projName)/ -name "*.out.elf"` ; do \
 	cp $${aa1} $${aa1}.strip ; \
 	/home/ti/ti/ccs1040/ccs/tools/compiler/msp430-gcc-9.3.1.11_linux64/bin/msp430-elf-strip \
 	$${aa1}.strip ; \
-	ls -l $${aa1}* $${aa1%.out}.map ; \
+	ls -l $${aa1}* $${aa1%.out.elf}.map ; \
 	done
 
 strip:ss
@@ -261,7 +261,7 @@ $$(testOBJnow) :
 		echo ; exit 33 )
 	cat log.$$@.txt |grep gcc |grep Wall ; \
 		echo ; echo " build $$@ -> $$($$@) ok " ; echo 
-	msp430-objdump -D $1/$1.hex > $1/$1.hex.asm
+	msp430-objdump -D $1/$1.ss.elf > $1/$1.ss.elf.asm
 	@echo
 $$(testOBJvim):
 	$$($$@) 
