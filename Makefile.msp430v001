@@ -11,7 +11,11 @@ define EOL
 endef
 
 define objOfC
-srcC2+=$1
+$$(eval objNow1:=$$(shell basename $1))
+$$(eval objNow2:=$$(basename $$(objNow1)))
+$$(eval objNow3:=$$(objNow2).o)
+$$(eval $$(objNow3):=$$(objNow1))
+srcC2+=$(objNow3),$$(objNow3),$$($$(objNow3));
 endef
 
 makefile_msp430:=$(strip $(wildcard $(shell realpath ../Makefile.msp430v001)))
