@@ -29,6 +29,8 @@ export msp430gcc93X
 export msp430objcopy
 export msp430objdump
 export disable_hex430
+msp430srec:=/usr/bin/srec_cat
+export msp430srec
 
 
 all:
