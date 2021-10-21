@@ -22,7 +22,7 @@ else
 msp430gcc93X:=/home/m430/a64/local/bin/msp430-elf-gcc
 msp430objcopy:=/home/m430/a64/local/bin/msp430-elf-objcopy
 msp430objdump:=/home/m430/a64/local/bin/msp430-elf-objdump
-disable_hex430:=#echo disable
+disable_hex430:=\#echo disable
 endif
 export uname_p
 export msp430gcc93X
