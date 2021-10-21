@@ -12,6 +12,25 @@ endef
 makefile_real:=$(shell realpath Makefile)
 makefile_dir:=$(shell dirname $(makefile_real))
 
+uname_p:=$(shell uname -p)
+ifeq ($(uname_p),x86_64)
+msp430gcc93X:=/home/m430/x64/local/bin/msp430-elf-gcc
+msp430objcopy:=/home/m430/x64/local/bin/msp430-elf-objcopy
+msp430objdump:=/home/m430/x64/local/bin/msp430-elf-objdump
+disable_hex430:=
+else
+msp430gcc93X:=/home/m430/a64/local/bin/msp430-elf-gcc
+msp430objcopy:=/home/m430/a64/local/bin/msp430-elf-objcopy
+msp430objdump:=/home/m430/a64/local/bin/msp430-elf-objdump
+disable_hex430:=echo disable
+endif
+export uname_p
+export msp430gcc93X
+export msp430objcopy
+export msp430objdump
+export disable_hex430
+
+
 all:
 	@echo "$${helpText}" 
 
