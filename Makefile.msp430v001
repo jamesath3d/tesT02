@@ -14,8 +14,10 @@ define objOfC
 $$(eval objNow1:=$$(shell basename $1))
 $$(eval objNow2:=$$(basename $$(objNow1)))
 $$(eval objNow3:=$$(objNow2).o)
-$$(eval $$(objNow3):=$$(objNow1))
-srcC2+=$(objNow3),$$(objNow3),$$($$(objNow3));
+$$(eval $$(objNow3):=$1)
+
+srcO1+=$$(objNow3)
+
 endef
 
 makefile_msp430:=$(strip $(wildcard $(shell realpath ../Makefile.msp430v001)))
@@ -28,14 +30,15 @@ dirH1:=$(foreach aa1,$(srcH9),$(shell dirname $(aa1)))
 dirH9:=$(strip $(shell echo $(dirH1)|sort -u ))
 
 srcC1:=$(strip $(wildcard ../src??/*.c ../src??/*.cpp))
-srcC2:=
+srcO1:=
 $(foreach aa1,$(srcC1),$(eval $(call objOfC,$(aa1))))
-srcC2:=$(strip $(srcC2))
+srcO1:=$(strip $(srcO1))
 
 define all_txt
 dirH9 -> $(dirH9)
 srcC1 -> $(srcC1)
-srcC2 -> $(srcC2)
+srcO1 -> $(srcO1)
+main.o -> $(main.o)
 
 endef
 export all_txt
