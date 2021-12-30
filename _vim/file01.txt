@@ -1,6 +1,5 @@
 Makefile
 Makefile.env
-./Makefile
 ./h01/_bit_set.h
 ./h01/_cable_tester.h
 ./h01/_delay_all.h
@@ -10,6 +9,7 @@ Makefile.env
 ./h01/_led_all.h
 ./h01/_test.h
 ./h01/_uart_p1_5_tx_only.h
+./Makefile
 ./src01/_bit_set.c
 ./src01/_cable_tester_mainloop_once.c
 ./src01/_delay_1ms.c
@@ -29,11 +29,11 @@ Makefile.env
 ./src01/_led_green_toggle.c
 ./src01/_led_red_set_output.c
 ./src01/_led_red_toggle.c
+./src01/main.c
+./src01/main_init.c
 ./src01/_test001.c
 ./src01/_test002.c
 ./src01/_test003.c
 ./src01/_uart_p1_5_tx_only_init.c
 ./src01/_uart_p1_5_tx_only_put_hex.c
 ./src01/_uart_p1_5_tx_only_testloop.c
-./src01/main.c
-./src01/main_init.c
