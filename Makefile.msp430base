@@ -1,0 +1,84 @@
+all:
+
+ifeq ($(USER),root)
+    $(info )
+    $(info "$0 can't run by $(USER). exit." )
+    $(info )
+    $(error exit )
+endif
+define EOL
+
+
+endef
+makefile_real:=$(shell realpath Makefile)
+makefile_dir:=$(shell dirname $(makefile_real))
+
+uname_p:=$(shell uname -p)
+ifeq ($(uname_p),x86_64)
+msp430gcc93X:=/home/m430/x64/local/bin/msp430-elf-gcc
+msp430objcopy:=/home/m430/x64/local/bin/msp430-elf-objcopy
+msp430objdump:=/home/m430/x64/local/bin/msp430-elf-objdump
+disable_hex430:=
+else
+msp430gcc93X:=/home/m430/a64/local/bin/msp430-elf-gcc
+msp430objcopy:=/home/m430/a64/local/bin/msp430-elf-objcopy
+msp430objdump:=/home/m430/a64/local/bin/msp430-elf-objdump
+disable_hex430:=\#echo disable
+endif
+export uname_p
+export msp430gcc93X
+export msp430objcopy
+export msp430objdump
+export disable_hex430
+msp430srec:=/usr/bin/srec_cat
+export msp430srec
+
+
+dateX1:=$(shell LC_ALL=C date +%Y_%m%d_%H%M%P_%S )
+
+msp430compileObj:=$(msp430gcc93X) \
+        -mhwmult=f5series \
+        -mmcu=msp430fr2433   \
+        -Og -g \
+        -gdwarf-3 \
+        -gstrict-dwarf \
+        -Wall  \
+        -MD \
+        -MP      \
+        -c 
+
+msp430compileBin:=$(msp430gcc93X) \
+        -mhwmult=f5series \
+        -mmcu=msp430fr2433   \
+        -Og -g \
+        -gdwarf-3 \
+        -gstrict-dwarf \
+        -Wall  \
+        -MD \
+        -MP      \
+        -Wl,-Map,${tName}.map \
+        -Wl,--gc-sections 
+
+#\
+    #"/home/ti/ti/ccs1040/ccs/tools/compiler/msp430-gcc-9.3.1.11_linux64/bin/msp430-elf-gcc-9.3.1"\
+    #-c\
+    #-mmcu=msp430fr2433\
+    #-mhwmult=f5series\
+    #-I"/home/ti/ti/ccs1040/ccs/ccs_base/msp430/include_gcc"\
+    #-I"/home/dyn/workspace_v10/BlinkLED_MSP430FR2433_03"\
+    #-I"/home/dyn/workspace_v10/BlinkLED_MSP430FR2433_03/driverlib/MSP430FR2xx_4xx"\
+    #-I"/home/ti/ti/ccs1040/ccs/tools/compiler/msp430-gcc-9.3.1.11_linux64/msp430-elf/include"\
+    #-Og\
+    #-g\
+    #-gdwarf-3\
+    #-gstrict-dwarf\
+    #-Wall\
+    #-MMD\
+    #-MP\
+    #-MF"_bit_set.d_raw"\
+    #-MT"_bit_set.o"\
+    #\
+    #\
+    #-o"_bit_set.o"\
+    #"../_bit_set.c"
+

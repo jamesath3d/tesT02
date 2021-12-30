@@ -53,6 +53,8 @@ ca: clean_all
 
 m:
 	vim Makefile ; echo
+v:
+	vim Makefile.msp430v001 ; echo
 
 vp : vim_prepare
 Makefile:=$(shell test -L Makefile && realpath --relative-to=. Makefile || echo Makefile)

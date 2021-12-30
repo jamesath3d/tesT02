@@ -1,24 +1,22 @@
+makefile_msp430base:=$(firstword $(wildcard ../Makefile.msp430base ./Makefile.msp430base))
+$(if $(makefile_msp430base),,$(error 3818818391 v01 makefile_msp430base not found))
+include $(makefile_msp430base)
 
-ifeq ($(USER),root)
-    $(info )
-    $(info "$0 can't run by $(USER). exit." )
-    $(info )
-    $(error exit )
-endif
-define EOL
-
-
-endef
-
-define objOfC
+define objFunC
 $$(eval objNow1:=$$(shell basename $1))
 $$(eval objNow2:=$$(basename $$(objNow1)))
 $$(eval objNow3:=$$(objNow2).o)
 $$(eval $$(objNow3):=$1)
 
-srcO1+=$$(objNow3)
+$$(objNow3):
+	$$(msp430compileObj) \
+		-o $$@ \
+		$$($$(objNow3))
+
+objO1+=$$(objNow3)
 
 endef
+
 
 makefile_msp430:=$(strip $(wildcard $(shell realpath ../Makefile.msp430v001)))
 $(if $(makefile_msp430),,$(error 18438341 Makefile not found. ))
@@ -30,15 +28,34 @@ dirH1:=$(foreach aa1,$(srcH9),$(shell dirname $(aa1)))
 dirH9:=$(strip $(shell echo $(dirH1)|sort -u ))
 
 srcC1:=$(strip $(wildcard ../src??/*.c ../src??/*.cpp))
-srcO1:=
-$(foreach aa1,$(srcC1),$(eval $(call objOfC,$(aa1))))
-srcO1:=$(strip $(srcO1))
+objO1:=
+$(foreach aa1,$(srcC1),$(eval $(call objFunC,$(aa1))))
+objO1:=$(strip $(objO1))
+
+build:=$(tName).out.elf
+$(build) : $(objO1)
+$(build) : 
+	cat $(objO1) > $@
+	$(msp430compileBin) \
+		$(msp430gccBinPara09) \
+		-o $@ \
+		$(objO1)
+
+b build : $(build)  
+	@ls -l $(tName).*
+
+
+c clean :
+	rm -f $(objO1) *.d $(build)
+
+#.PHONY : $(objO1)
 
 define all_txt
 dirH9 -> $(dirH9)
 srcC1 -> $(srcC1)
-srcO1 -> $(srcO1)
+objO1 -> $(objO1)
 main.o -> $(main.o)
+tName -> $(tName)-> $($(tName))
 
 endef
 export all_txt
@@ -47,4 +64,4 @@ all:
 	@echo
 	@echo "$${all_txt}"
 	@echo
-	
+
