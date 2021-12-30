@@ -291,11 +291,21 @@ $$(testOBJnow) :
 $$(testOBJvim) $$(testOBJlog) :
 	$$($$@) 
 	@echo
+
 $$(testOBJvim)_txt:= \#\# $$($1_txt)
+$$(testOBJvim)_txt:= kkkkz $1_txt) : $$(testOBJvim)_txt
+$$(testOBJvim)_thelp:= \# $$(shell test -f Makefile.$1 \
+	&& (( grep ^tHelp:= Makefile.$1 \
+	|| echo " error 18381818181 !  \n file Makefile.$1  forgot define ^tHelp:=.  " \
+	)|head -n 1 |sed -e 's;^tHelp:=;;g') \
+	|| echo "file Makefile.$1 don't exist. error 18381818183 !") \#
+$$(testOBJvim)_txt:=$$($$(testOBJvim)_thelp)
+
 
 $$(eval testOBJidx:=$$(shell expr $$(testOBJidx) + 1 ))
 
-endef
+endef 
+# end of : define testOBJfunc
 $(foreach aa1,$(testOBJs),$(eval $(call testOBJfunc,$(aa1))))
 
 ttt:=$(t5a)
