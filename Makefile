@@ -40,6 +40,32 @@ all:
 ifndef  Makefile_env
 include Makefile.env
 Makefile_env:=1
+
+projName:=$(strip $(firstword $(projName)))
+
+projNeeds:=projName msp430DebugNameS testOBJs
+projNeeds:=projName testOBJs
+projNeeds:=projName
+$(foreach aa1,$(projNeeds),$(if $($(aa1)),,$(info undefined VAR "$(aa1)" in Makefile.env, exit)$(error 838111831)))
+
+c01:=$(shell find $(projName)/ -name "*.c")
+h01:=$(shell find $(projName)/ -name "*.h")
+o01:=$(shell find $(projName)/ -name makefile -o -name Makefile -o -name "*.mk")
+
+
+
+c02:=$(foreach aa1,$(c01), ../$(aa1))
+h02:=$(foreach aa1,$(h01), ../$(aa1))
+o02:=$(foreach aa1,$(o01), ../$(aa1))
+c09:=$(c01)
+h09:=$(h01)
+o09:=$(o01)
+
+$(if $(c09),,$(error "c09 don't exit. check <projName> and run again. Exit. 83491981831 "))
+
+vim_tags_objS:=$(shell echo $(c09) $(h09) $(o09)|xargs -n 1|sort -u)
+vim_edit_objS:=$(shell echo $(c09)              |xargs -n 1|sort -u)
+
 endif
 
 #projName:= 
