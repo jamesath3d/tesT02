@@ -42,7 +42,7 @@ include Makefile.env
 Makefile_env:=1
 
 projName:=$(strip $(firstword $(projName)))
-projFullName:=$(strip $(firstword $(projFullName)))
+projFullName:=$(strip $(projFullName))
 projFullName:=$(if $(projFullName),$(projFullName),$(projName))
 
 projNeeds:=projName msp430DebugNameS testOBJs
@@ -393,7 +393,7 @@ define helpText
 ) ttt -> $(ttt)
  ss  -> strip
 $(helpText2)$(helpDebug)
-## $(projFullName)
+## ## ##     $(projFullName)     ## ## ## 
 
 endef
 export helpText
