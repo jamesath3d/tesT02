@@ -42,6 +42,8 @@ include Makefile.env
 Makefile_env:=1
 
 projName:=$(strip $(firstword $(projName)))
+projFullName:=$(strip $(firstword $(projFullName)))
+projFullName:=$(if $(projFullName),$(projFullName),$(projName))
 
 projNeeds:=projName msp430DebugNameS testOBJs
 projNeeds:=projName testOBJs
@@ -68,7 +70,6 @@ vim_edit_objS:=$(shell echo $(c09)              |xargs -n 1|sort -u)
 
 endif
 
-#projName:= 
 projName:=$(strip $(projName))
 $(if $(projName),,$(eval projName=.))
 testOBJs:=$(strip $(testOBJs))
@@ -392,6 +393,8 @@ define helpText
 ) ttt -> $(ttt)
  ss  -> strip
 $(helpText2)$(helpDebug)
+## $(projFullName)
+
 endef
 export helpText
 
