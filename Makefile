@@ -36,6 +36,12 @@ export msp430srec
 all:
 	@echo "$${helpText}" 
 
+vv:
+	@echo "$${vimTextV1}"
+
+vvv:
+	@echo "$${vimText}"
+
 
 ifndef  Makefile_env
 include Makefile.env
@@ -50,23 +56,18 @@ projNeeds:=projName testOBJs
 projNeeds:=projName
 $(foreach aa1,$(projNeeds),$(if $($(aa1)),,$(info undefined VAR "$(aa1)" in Makefile.env, exit)$(error 838111831)))
 
-c01:=$(shell find $(projName)/ -name "*.c")
-h01:=$(shell find $(projName)/ -name "*.h")
-o01:=$(shell find $(projName)/ -name makefile -o -name Makefile -o -name "*.mk")
+c01:=$(foreach aa1,$(wildcard src0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.c"))
+h01:=$(foreach aa1,$(wildcard   h0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.h"))
+o01:=$(foreach aa1,$(wildcard   o0?/ $(projName)/ ) ,$(shell find $(aa1) -name makefile -o -name Makefile -o -name "*.mk"))
 
-
-
-c02:=$(foreach aa1,$(c01), ../$(aa1))
-h02:=$(foreach aa1,$(h01), ../$(aa1))
-o02:=$(foreach aa1,$(o01), ../$(aa1))
 c09:=$(c01)
 h09:=$(h01)
 o09:=$(o01)
 
 $(if $(c09),,$(error "c09 don't exit. check <projName> and run again. Exit. 83491981831 "))
 
-vim_tags_objS:=$(shell echo $(c09) $(h09) $(o09)|xargs -n 1|sort -u)
-vim_edit_objS:=$(shell echo $(c09)              |xargs -n 1|sort -u)
+vim_tags_objS:=$(shell echo $(c09) $(h09) $(o09)|xargs -n 1 realpath --relative-to=.|sort -u)
+vim_edit_objS:=$(shell echo $(c09)              |xargs -n 1 realpath --relative-to=.|sort -u)
 
 endif
 
@@ -384,14 +385,25 @@ endef
 
 #helpDebug +=$(EOL)$(helpDebug3)
 
-define helpText
+define vimText
  $(foreach ee1,$(c2vP3),$(ee1) -> vim $($(ee1))
 ) 
- $(foreach ee1,$(msp430vP3),$(ee1) -> build in $($(ee1))
-) 
+endef
+export vimText
+
+define vimTextV1
+ $(foreach ee1,$(c2vP3),$(if 
+ $(shell test `dirname $($(ee1))` = $(projName) && echo 11 )
+ ,$(ee1) -> vim $($(ee1)) $(EOL))) 
+endef
+export vimTextV1
+
+define helpText
+$(vimText)
  $(foreach ee1,cmdc $(gitgit) d2u b4a b4c b4m $(v5a) $(t5a),$(ee1) -> $($(ee1)) $($(ee1)_txt) 
 ) ttt -> $(ttt)
  ss  -> strip
+ vv  -> list all vim files
 $(helpText2)$(helpDebug)
 ## ## ##     $(projFullName)     ## ## ## 
 
