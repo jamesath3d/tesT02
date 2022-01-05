@@ -285,7 +285,7 @@ testOBJvP4:=
 t5a:=
 v5a:=
 define testOBJfunc
-$$(eval testOBJnow:=t5$$(testOBJidx))
+$$(eval testOBJnow:=k5$$(testOBJidx))
 $$(eval testOBJvim:=v5$$(testOBJidx))
 $$(eval testOBJlog:=l5$$(testOBJidx))
 $$(eval testOBJmake:=$$(shell realpath Makefile.$1))
