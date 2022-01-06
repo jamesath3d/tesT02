@@ -1,4 +1,162 @@
 make[1]: Entering directory '/home/sdb3/rw/home/dyn/tesT02/tt1'
-make[1]: /home/sdb3/rw/home/dyn/tesT02/Makefile.tt1: No such file or directory
-make[1]: *** No rule to make target '/home/sdb3/rw/home/dyn/tesT02/Makefile.tt1'.  Stop.
+
+srcC9 -> ../src01/_test002.c ../src01/_i2c01_clk_to_1.c ../src01/_i2c01_sda_to_1.c ../src01/_delay_1s.c ../src01/_uart_p1_5_tx_only_init.c ../src01/_led_red_toggle.c ../src01/_uart_p1_5_tx_only_put_hex.c ../src01/_i2c01_init.c ../src01/_i2c_expander01_check_sda1.c ../src01/_led_red_set_output.c ../src01/_delay_1ms.c ../src01/_test003.c ../src01/main_init.c ../src01/_i2c_expander01_testLoop.c ../src01/_led_green_set_output.c ../src01/_uart_p1_5_tx_only_testloop.c ../src01/main.c ../src01/_delay_1us.c ../src01/_test001.c ../src01/_i2c_expander01_r1w0_6.c ../src01/_i2c_expander01_read6.c ../src01/_i2c_expander01_reset.c ../src01/_i2c01_clk_to_0.c ../src01/_led_green_toggle.c ../src01/_cable_tester_mainloop_once.c ../src01/_i2c01_sda_to_0.c ../src01/_bit_set.c
+srcH9 -> ../h01/_led_all.h ../h01/_delay_all.h ../h01/_include_all.h ../h01/_uart_p1_5_tx_only.h ../h01/_i2c01.h ../h01/_test.h ../h01/_bit_set.h ../h01/_i2c_expander01.h ../h01/_cable_tester.h
+dirC9 -> ../src01
+dirH9 -> ../h01
+
+
+"/home/ti/ti/ccs1040/ccs/tools/compiler/msp430-gcc-9.3.1.11_linux64/bin/msp430-elf-gcc-9.3.1"   -Wl,-Map,"tt1.map" -o"tt1.out.elf"  -mhwmult=f5series -Og -g -gdwarf-3 -gstrict-dwarf -Wall -mmcu=msp430fr2433   -Wl,--gc-sections      -I../h01                         -L../xl_tt1/  -I../xh_tt1/  ../src01/_test002.c ../src01/_i2c01_clk_to_1.c ../src01/_i2c01_sda_to_1.c ../src01/_delay_1s.c ../src01/_uart_p1_5_tx_only_init.c ../src01/_led_red_toggle.c ../src01/_uart_p1_5_tx_only_put_hex.c ../src01/_i2c01_init.c ../src01/_i2c_expander01_check_sda1.c ../src01/_led_red_set_output.c ../src01/_delay_1ms.c ../src01/_test003.c ../src01/main_init.c ../src01/_i2c_expander01_testLoop.c ../src01/_led_green_set_output.c ../src01/_uart_p1_5_tx_only_testloop.c ../src01/main.c ../src01/_delay_1us.c ../src01/_test001.c ../src01/_i2c_expander01_r1w0_6.c ../src01/_i2c_expander01_read6.c ../src01/_i2c_expander01_reset.c ../src01/_i2c01_clk_to_0.c ../src01/_led_green_toggle.c ../src01/_cable_tester_mainloop_once.c ../src01/_i2c01_sda_to_0.c ../src01/_bit_set.c  -Wl,--start-group -lgcc -lc -Wl,--end-group                                                         -Dtt1
+In file included from ../h01/_test.h:11,
+                 from ../src01/_test002.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_i2c01.h:11,
+                 from ../src01/_i2c01_clk_to_1.c:9:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_i2c01.h:11,
+                 from ../src01/_i2c01_sda_to_1.c:9:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../src01/_delay_1s.c:2:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_uart_p1_5_tx_only.h:11,
+                 from ../src01/_uart_p1_5_tx_only_init.c:10:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_led_all.h:11,
+                 from ../src01/_led_red_toggle.c:9:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_uart_p1_5_tx_only.h:11,
+                 from ../src01/_uart_p1_5_tx_only_put_hex.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_i2c01.h:11,
+                 from ../src01/_i2c01_init.c:9:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_i2c_expander01.h:4,
+                 from ../src01/_i2c_expander01_check_sda1.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../src01/_led_red_set_output.c:1:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../src01/_delay_1ms.c:2:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_test.h:11,
+                 from ../src01/_test003.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../src01/main_init.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../src01/_i2c_expander01_testLoop.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../src01/_led_green_set_output.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+../src01/_uart_p1_5_tx_only_testloop.c:8:10: fatal error: msp430.h: No such file or directory
+    8 | #include <msp430.h>
+      |          ^~~~~~~~~~
+compilation terminated.
+In file included from ../src01/main.c:2:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../src01/_delay_1us.c:2:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_test.h:11,
+                 from ../src01/_test001.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_i2c_expander01.h:4,
+                 from ../src01/_i2c_expander01_r1w0_6.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_i2c_expander01.h:4,
+                 from ../src01/_i2c_expander01_read6.c:8:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../src01/_i2c_expander01_reset.c:2:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_i2c01.h:11,
+                 from ../src01/_i2c01_clk_to_0.c:9:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../src01/_led_green_toggle.c:7:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_cable_tester.h:11,
+                 from ../src01/_cable_tester_mainloop_once.c:9:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_i2c01.h:11,
+                 from ../src01/_i2c01_sda_to_0.c:9:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+In file included from ../h01/_bit_set.h:5,
+                 from ../src01/_bit_set.c:9:
+../h01/_include_all.h:11:10: fatal error: driverlib.h: No such file or directory
+   11 | #include <driverlib.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+/home/sdb3/rw/home/dyn/tesT03/Makefile.tt1:100: recipe for target 'tt1' failed
+make[1]: *** [tt1] Error 1
 make[1]: Leaving directory '/home/sdb3/rw/home/dyn/tesT02/tt1'
