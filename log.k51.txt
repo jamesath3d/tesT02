@@ -1,0 +1,4 @@
+make[1]: Entering directory '/home/sdb3/rw/home/dyn/tesT02/tt1'
+make[1]: /home/sdb3/rw/home/dyn/tesT02/Makefile.tt1: No such file or directory
+make[1]: *** No rule to make target '/home/sdb3/rw/home/dyn/tesT02/Makefile.tt1'.  Stop.
+make[1]: Leaving directory '/home/sdb3/rw/home/dyn/tesT02/tt1'

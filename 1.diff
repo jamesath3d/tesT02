@@ -1,0 +1,147 @@
+Only in BlinkLED_MSP430FR2433_03: 1
+Only in BlinkLED_MSP430FR2433_03: _bit_set.h
+Only in BlinkLED_MSP430FR2433_03: _cable_tester.h
+diff -r src01/_cable_tester_mainloop_once.c BlinkLED_MSP430FR2433_03/_cable_tester_mainloop_once.c
+36c36,37
+< inline uint8_t _cable_tester_mainloop_onceX3Y(void){
+---
+> 
+> uint8_t _cable_tester_mainloop_onceX3Y(void){
+232a234,236
+> 
+>     __ii = 0 ;
+> 
+Only in BlinkLED_MSP430FR2433_03: .ccsproject
+Only in BlinkLED_MSP430FR2433_03: _clk_init.c
+Only in BlinkLED_MSP430FR2433_03: _clk_init.h
+Only in BlinkLED_MSP430FR2433_03: .cproject
+Only in BlinkLED_MSP430FR2433_03: Debug
+Only in BlinkLED_MSP430FR2433_03: Debug__GNU
+Only in BlinkLED_MSP430FR2433_03: Debug__TI
+Only in BlinkLED_MSP430FR2433_03: Debug__TIH
+Only in BlinkLED_MSP430FR2433_03: Debug__TIT
+Only in BlinkLED_MSP430FR2433_03: _delay_all.h
+Only in BlinkLED_MSP430FR2433_03: driverlib
+Only in BlinkLED_MSP430FR2433_03: .git
+Only in BlinkLED_MSP430FR2433_03: .gitignore
+Only in BlinkLED_MSP430FR2433_03: _gpio_init.c
+Only in BlinkLED_MSP430FR2433_03: _gpio_init.h
+Only in BlinkLED_MSP430FR2433_03: _gpio_init__single.h
+diff -r src01/_i2c01_clk_to_0.c BlinkLED_MSP430FR2433_03/_i2c01_clk_to_0.c
+10a11
+> /*
+17c18
+< 
+---
+> */
+diff -r src01/_i2c01_clk_to_1.c BlinkLED_MSP430FR2433_03/_i2c01_clk_to_1.c
+10a11
+> /*
+16a18
+> */
+Only in BlinkLED_MSP430FR2433_03: _i2c01.h
+diff -r src01/_i2c01_init.c BlinkLED_MSP430FR2433_03/_i2c01_init.c
+10a11
+> /*
+27a29
+> */
+diff -r src01/_i2c01_sda_to_0.c BlinkLED_MSP430FR2433_03/_i2c01_sda_to_0.c
+10a11
+> /*
+18,24d18
+< 
+<     /*
+<     GPIO_setOutputLowOnPin(
+<         _I2C01_SDA_PORT,
+<         _I2C01_SDA_PIN
+<         );
+< 	*/
+26a21
+> */
+diff -r src01/_i2c01_sda_to_1.c BlinkLED_MSP430FR2433_03/_i2c01_sda_to_1.c
+10a11
+> /*
+18,23d18
+<     /*
+<     GPIO_setOutputHighOnPin(
+<         _I2C01_SDA_PORT,
+<         _I2C01_SDA_PIN
+<         );
+< 	*/
+25a21
+> */
+Only in BlinkLED_MSP430FR2433_03: _i2c_expander01.h
+Only in BlinkLED_MSP430FR2433_03: _include_all.h
+Only in BlinkLED_MSP430FR2433_03: .launches
+Only in BlinkLED_MSP430FR2433_03: _led_all.h
+diff -r src01/_led_green_set_output.c BlinkLED_MSP430FR2433_03/_led_green_set_output.c
+9a10
+> /*
+18a20
+> */
+diff -r src01/_led_green_toggle.c BlinkLED_MSP430FR2433_03/_led_green_toggle.c
+8a9
+> /*
+15a17
+> */
+diff -r src01/_led_red_set_output.c BlinkLED_MSP430FR2433_03/_led_red_set_output.c
+2a3
+> /*
+11a13
+> */
+diff -r src01/_led_red_toggle.c BlinkLED_MSP430FR2433_03/_led_red_toggle.c
+10a11
+> /*
+16a18
+> */
+Only in BlinkLED_MSP430FR2433_03: lnk_msp430fr2433.cmd
+diff -r src01/main.c BlinkLED_MSP430FR2433_03/main.c
+11c11
+<     uint8_t __jj ;
+---
+>     //uint8_t __jj ;
+42,43c42,44
+<             __jj ++ ;
+<             if ( __jj & 1 ) {
+---
+>             //__jj ++ ;
+>             //if ( __jj & 1 ) {
+>             if ( __ii & 1 ) {
+diff -r src01/main_init.c BlinkLED_MSP430FR2433_03/main_init.c
+12c12,15
+<     WDT_A_hold(WDT_A_BASE);
+---
+> //#ifndef tt4
+> //    WDT_A_hold(WDT_A_BASE);
+>     WDTCTL = WDTPW | WDTHOLD; // Stop watchdog timer
+> //#endif
+32c35,41
+<     PMM_unlockLPM5();
+---
+> //#ifndef tt4
+> //    PMM_unlockLPM5();
+>     PM5CTL0 &= ~LOCKLPM5;
+> //#endif
+> //#ifdef tt4
+> //#error 33j13j3j1kkk
+> //#endif
+Only in BlinkLED_MSP430FR2433_03: msp430fr2433.ld
+Only in BlinkLED_MSP430FR2433_03: .project
+Only in BlinkLED_MSP430FR2433_03: .settings
+Only in BlinkLED_MSP430FR2433_03: targetConfigs
+diff -r src01/_test002.c BlinkLED_MSP430FR2433_03/_test002.c
+9a10
+> /*
+50a52
+> */
+Only in BlinkLED_MSP430FR2433_03: _test.h
+Only in BlinkLED_MSP430FR2433_03: _uart_p1_5_tx_only.h
+diff -r src01/_uart_p1_5_tx_only_put_hex.c BlinkLED_MSP430FR2433_03/_uart_p1_5_tx_only_put_hex.c
+96,98c96,98
+< void _uart_p1_5_tx_only_put_str(uint8_t ___str[]){
+<     uint8_t * __lp;
+<     uint8_t   __c;
+---
+> void _uart_p1_5_tx_only_put_str(char ___str[]){
+>     char * __lp;
+>     char   __c;
