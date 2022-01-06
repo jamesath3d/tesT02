@@ -347,12 +347,14 @@ mspFlash_cmd:=LD_PRELOAD=$(mspFlash_path)/libmsp430.so $(mspFlash_path)/MSP430Fl
 
 burn := list burn files command
 burn :
-	for aa1 in $(txtFiles) ; do \
+	echo " if ' ERROR: The Debug Interface to the device has been secured ' , add ' -e ERASE_USER_CODE ' " ; echo \
+		echo ; echo "you can use the following command : begin" ; \
+		for aa1 in $(txtFiles) ; do \
 		test -f $${aa1} || exit 32 ; \
 		echo ; \
 		echo "$(mspFlash_cmd)" ; \
-		done ; echo
-	@echo " if ' ERROR: The Debug Interface to the device has been secured ' , add ' -e ERASE_USER_CODE ' " ; echo
+		done ; \
+		echo ; echo "you can use the following command : end"  ; echo
 	
 
 
