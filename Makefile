@@ -56,9 +56,9 @@ projNeeds:=projName testOBJs
 projNeeds:=projName
 $(foreach aa1,$(projNeeds),$(if $($(aa1)),,$(info undefined VAR "$(aa1)" in Makefile.env, exit)$(error 838111831)))
 
-c01:=$(foreach aa1,$(wildcard src0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.c"))
-h01:=$(foreach aa1,$(wildcard   h0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.h"))
-o01:=$(foreach aa1,$(wildcard   o0?/ $(projName)/ ) ,$(shell find $(aa1) -name makefile -o -name Makefile -o -name "*.mk"))
+c01:=$(foreach aa1,$(wildcard                 src0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.c"))
+h01:=$(foreach aa1,$(wildcard  xl_tt?/ xh_tt?/  h0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.h"))
+o01:=$(foreach aa1,$(wildcard                   o0?/ $(projName)/ ) ,$(shell find $(aa1) -name makefile -o -name Makefile -o -name "*.mk"))
 
 c09:=$(c01)
 h09:=$(h01)
@@ -345,17 +345,38 @@ mspFlash_txt:=input.ti.txt
 mspFlash_cmd=LD_PRELOAD=$(mspFlash_path)/libmsp430.so $(mspFlash_path)/MSP430Flasher -w input.ti.txt -v -g -z [VCC]
 mspFlash_cmd:=LD_PRELOAD=$(mspFlash_path)/libmsp430.so $(mspFlash_path)/MSP430Flasher -w $${aa1} -v -g -z [VCC]
 
+burnIdx:=0
+burnCMDs:=
+define burnFunc
+$(eval burnIdx:=$$(shell expr $$(burnIdx) + 1 ))
+$(eval burnNow:=burn$$(burnIdx))
+$(eval $(burnNow):=$$(mspFlash_cmd))
+$(burnNow):
+	LD_PRELOAD=$(mspFlash_path)/libmsp430.so $(mspFlash_path)/MSP430Flasher -w $1 -v -g -z [VCC]
+export $(burnNow)
+burnCMDs += $(burnNow)
+
+$$(iinfo burn -- '$1' "$(burnIdx)" "$(burnNow)" "$($(burnNow))" )
+
+endef
+
+$(foreach aa1,$(shell echo $(txtFiles)|xargs -n 1),$(eval $(call burnFunc,$(aa1))))
+
+define burnHelpText
+
+if ' ERROR: The Debug Interface to the device has been secured ' , add ' -e ERASE_USER_CODE ' 
+
+you can use the following command : begin
+
+    $(foreach aa1,$(burnCMDs), $(aa1) -> $($(aa1)) $(EOL)    )
+
+you can use the following command : end
+endef
+export burnHelpText
+
 burn := list burn files command
 burn :
-	echo " if ' ERROR: The Debug Interface to the device has been secured ' , add ' -e ERASE_USER_CODE ' " ; echo \
-		echo ; echo "you can use the following command : begin" ; \
-		for aa1 in $(txtFiles) ; do \
-		test -f $${aa1} || exit 32 ; \
-		echo ; \
-		echo "$(mspFlash_cmd)" ; \
-		done ; \
-		echo ; echo "you can use the following command : end"  ; echo
-	
+	@echo "$${burnHelpText}"
 
 
 
