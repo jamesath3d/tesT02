@@ -136,6 +136,8 @@ $(c2vP3) :
 
 
 
+X: ga gc up
+
 ga:=git add .
 gs:=git status
 gc:=git commit -a
