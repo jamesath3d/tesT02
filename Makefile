@@ -141,6 +141,7 @@ X: ga gc up
 ga:=git add .
 gs:=git status
 gc:=git commit -a
+gcX:=git commit -a -m "$(dateX1)"
 gd:=git diff
 up:=git push -u origin main
 gas:=cd $(projName)/     && $(ga)
@@ -154,7 +155,7 @@ upm:=cd $(makefile_dir)/ && $(up)
 gds:=cd $(projName)/     && $(gd)
 gdm:=cd $(makefile_dir)/ && $(gd)
 
-gitgit:= gds gdm ups upm gcs gcm gss gsm gas gam ga gs gc gd up
+gitgit:= gds gdm ups upm gcs gcm gss gsm gas gam ga gs gc gd up gcX X
 define gitctr
 $1 :
 	$$($$@)
