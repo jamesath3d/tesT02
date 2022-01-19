@@ -136,10 +136,13 @@ $(c2vP3) :
 
 
 
+ga:=git add .
 gs:=git status
 gc:=git commit -a
 gd:=git diff
 up:=git push -u origin main
+gas:=cd $(projName)/     && $(ga)
+gam:=cd $(makefile_dir)/ && $(ga)
 gss:=cd $(projName)/     && $(gs)
 gsm:=cd $(makefile_dir)/ && $(gs)
 gcs:=cd $(projName)/     && $(gc)
@@ -149,7 +152,7 @@ upm:=cd $(makefile_dir)/ && $(up)
 gds:=cd $(projName)/     && $(gd)
 gdm:=cd $(makefile_dir)/ && $(gd)
 
-gitgit:= gds gdm ups upm gcs gcm gss gsm gs gc gd up
+gitgit:= gds gdm ups upm gcs gcm gss gsm gas gam ga gs gc gd up
 define gitctr
 $1 :
 	$$($$@)
