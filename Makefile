@@ -326,7 +326,7 @@ $$(testOBJnow) :
 		echo ; exit 33 )
 	cat log.$$@.txt |grep gcc |grep Wall ; \
 		echo ; echo " build $$@ -> $$($$@) ok " ; echo 
-	msp430-objdump -D $1/$1.ss.elf > $1/$1.ss.elf.asm
+	msp430-objdump -D $1/$1.ss.elf > $1/$1.ss.elf.asm ### --disassemble-all ###
 	@echo
 $$(testOBJvim) $$(testOBJlog) :
 	$$($$@) 
