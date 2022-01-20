@@ -67,7 +67,12 @@ o09:=$(o01)
 $(if $(c09),,$(error "c09 don't exit. check <projName> and run again. Exit. 83491981831 "))
 
 vim_tags_objS:=$(shell echo $(c09) $(h09) $(o09)|xargs -n 1 realpath --relative-to=.|sort -u)
-vim_edit_objS:=$(shell echo $(c09)              |xargs -n 1 realpath --relative-to=.|sort -u)
+vim_edit_objS1:=$(shell echo $(c09)              |xargs -n 1 realpath --relative-to=.|sort -u)
+export vim_edit_objS1
+vim_edit_objS:=$(shell \
+	echo "${vim_edit_objS1}" |xargs -n 1 |grep    /main.c$$ ; \
+	echo "${vim_edit_objS1}" |xargs -n 1 |grep -v /main.c$$ \
+	)
 
 endif
 
