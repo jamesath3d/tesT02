@@ -9,6 +9,11 @@ define EOL
 
 
 endef
+define callFUNC
+$1 :
+	$($1)
+endef
+
 makefile_real:=$(shell realpath Makefile)
 makefile_dir:=$(shell dirname $(makefile_real))
 
