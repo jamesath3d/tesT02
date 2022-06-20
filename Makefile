@@ -69,15 +69,17 @@ $(foreach aa1,$(projNeeds),$(if $($(aa1)),,$(info undefined VAR "$(aa1)" in Make
 c01:=$(foreach aa1,$(wildcard                 src0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.c"))
 h01:=$(foreach aa1,$(wildcard  xl_tt?/ xh_tt?/  h0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.h"))
 o01:=$(foreach aa1,$(wildcard                   o0?/ $(projName)/ ) ,$(shell find $(aa1) -name makefile -o -name Makefile -o -name "*.mk"))
+ex01:=$(foreach aa1,$(wildcard                 ex0?/              ) ,$(shell find $(aa1) -name "*.c"))
 
 c09:=$(c01)
 h09:=$(h01)
 o09:=$(o01)
+ex09:=$(ex01)
 
 $(if $(c09),,$(error "c09 don't exit. check <projName> and run again. Exit. 83491981831 "))
 
-vim_tags_objS:=$(shell echo . $(c09) $(h09) $(o09)|xargs -n 1 realpath --relative-to=.|sort -u)
-vim_edit_objS1:=$(shell echo . $(c09)              |xargs -n 1 realpath --relative-to=.|sort -u)
+vim_tags_objS:=$(shell  echo . $(ex09) $(c09) $(h09) $(o09)|xargs -n 1 realpath --relative-to=.|sort -u)
+vim_edit_objS1:=$(shell echo . $(ex09) $(c09)              |xargs -n 1 realpath --relative-to=.|sort -u)
 export vim_edit_objS1
 vim_edit_objS:=$(shell \
 	echo "${vim_edit_objS1}" |xargs -n 1 |grep    /main.c$$ ; \
