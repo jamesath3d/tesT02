@@ -150,7 +150,7 @@ c2idx:=$(shell expr $(c2idx) + 1 )
 
 endef
 
-$(foreach bb1,$(vim_edit_objS),$(eval $(call c2v,$(bb1))))
+$(foreach bb1,$(filter-out .,$(vim_edit_objS)),$(eval $(call c2v,$(bb1))))
 
 #	vim $($@)
 $(c2vP3) : 
