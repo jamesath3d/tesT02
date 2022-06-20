@@ -36,6 +36,8 @@ src01/_test003.c
 src01/_uart_p1_5_tx_only_init.c
 src01/_uart_p1_5_tx_only_put_hex.c
 src01/_uart_p1_5_tx_only_testloop.c
+../workspace_v10/BlinkLED_MSP430FR2433_03/_adc_init.c
+../workspace_v10/BlinkLED_MSP430FR2433_03/_adc_init.h
 ../workspace_v10/BlinkLED_MSP430FR2433_03/_bit_set.c
 ../workspace_v10/BlinkLED_MSP430FR2433_03/_bit_set.h
 ../workspace_v10/BlinkLED_MSP430FR2433_03/_cable_tester.h
@@ -160,3 +162,5 @@ src01/_uart_p1_5_tx_only_testloop.c
 ../workspace_v10/BlinkLED_MSP430FR2433_03/_uart_p1_5_tx_only_init.c
 ../workspace_v10/BlinkLED_MSP430FR2433_03/_uart_p1_5_tx_only_put_hex.c
 ../workspace_v10/BlinkLED_MSP430FR2433_03/_uart_p1_5_tx_only_testloop.c
+../workspace_v10/BlinkLED_MSP430FR2433_03/_wdt_init.c
+../workspace_v10/BlinkLED_MSP430FR2433_03/_wdt_init.h
