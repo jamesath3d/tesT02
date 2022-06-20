@@ -14,6 +14,11 @@ $1 :
 	$($1)
 endef
 
+PWD         := $(shell pwd)
+KVERSION    := $(shell uname -r)
+KERNEL_DIR  ?= /lib/modules/$(KVERSION)/build
+
+
 makefile_real:=$(shell realpath Makefile)
 makefile_dir:=$(shell dirname $(makefile_real))
 
