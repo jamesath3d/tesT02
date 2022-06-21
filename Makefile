@@ -11,6 +11,7 @@ define EOL
 endef
 define callFUNC
 $1 :
+	@echo
 	$($1)
 endef
 
