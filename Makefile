@@ -76,7 +76,7 @@ ex01:=$(foreach aa1,$(wildcard                 ex0?/              ) ,$(shell fin
 c09:=$(c01)
 h09:=$(h01)
 o09:=$(o01)
-ex09:=$(ex01) $(wildcard ./Makefile)
+ex09:=$(ex01) $(wildcard ./Makefile ./Makefile.env)
 
 $(if $(c09),,$(error "c09 don't exit. check <projName> and run again. Exit. 83491981831 "))
 
