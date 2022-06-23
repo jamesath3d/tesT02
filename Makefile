@@ -44,8 +44,15 @@ msp430srec:=/usr/bin/srec_cat
 export msp430srec
 
 
-all:
+all: ex03/i2cget_v4.2.c ex03/i2cbusses_v4.2.c ex03/smbus_v4.2.c 
 	@echo "$${helpText}" 
+
+ex03/i2cget_v4.2.c : i2c-tools/tools/i2cget.c
+	cat $^ > $@
+ex03/i2cbusses_v4.2.c : i2c-tools/tools/i2cbusses.c
+	cat $^ > $@
+ex03/smbus_v4.2.c : i2c-tools/lib/smbus.c
+	cat $^ > $@
 
 vv:
 	@echo "$${vimTextV1}"
@@ -113,7 +120,7 @@ vim_prepare :
 	mkdir -p _vim/
 	echo $(Makefile)                            > _vim/file01.txt
 	echo Makefile.env                          >> _vim/file01.txt
-	echo $(vim_tags_objS) |xargs -n 1          >> _vim/file01.txt
+	echo $(vim_tags_objS) |sort |xargs -n 1    >> _vim/file01.txt
 	sed -i -e '/^\.$$/d' -e '/^$$/d'              _vim/file01.txt
 	cscope -q -R -b -i                            _vim/file01.txt
 	ctags -L                                      _vim/file01.txt
