@@ -44,7 +44,7 @@ msp430srec:=/usr/bin/srec_cat
 export msp430srec
 
 
-all: ex03/i2cget_v4.2.c ex03/i2cbusses_v4.2.c ex03/smbus_v4.2.c 
+all: # ex03/i2cget_v4.2.c ex03/i2cbusses_v4.2.c ex03/smbus_v4.2.c 
 	@echo "$${helpText}" 
 
 ex03/i2cget_v4.2.c : i2c-tools/tools/i2cget.c
@@ -74,7 +74,7 @@ projNeeds:=projName testOBJs
 projNeeds:=projName
 $(foreach aa1,$(projNeeds),$(if $($(aa1)),,$(info undefined VAR "$(aa1)" in Makefile.env, exit)$(error 838111831)))
 
-c01:=$(foreach aa1,$(wildcard                 src0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.c"))
+c01:=$(foreach aa1,$(wildcard                 src0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.c" -o -name "*.ino" -o -name "*.cpp" ))
 h01:=$(foreach aa1,$(wildcard  xl_tt?/ xh_tt?/  h0?/ $(projName)/ ) ,$(shell find $(aa1) -name "*.h"))
 o01:=$(foreach aa1,$(wildcard                   o0?/ $(projName)/ ) ,$(shell find $(aa1) -name makefile -o -name Makefile -o -name "*.mk"))
 
