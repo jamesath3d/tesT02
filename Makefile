@@ -47,6 +47,11 @@ export msp430srec
 all: # ex03/i2cget_v4.2.c ex03/i2cbusses_v4.2.c ex03/smbus_v4.2.c 
 	@echo "$${helpText}" 
 
+e8:
+	@echo; echo; echo; echo; echo; echo; echo; echo; 
+e16: e8
+	@echo; echo; echo; echo; echo; echo; echo; echo; 
+
 ex03/i2cget_v4.2.c : i2c-tools/tools/i2cget.c
 	cat $^ > $@
 ex03/i2cbusses_v4.2.c : i2c-tools/tools/i2cbusses.c
